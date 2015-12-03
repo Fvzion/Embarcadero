@@ -1,0 +1,85 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#include <math.h>
+#include <conio.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+	//Inicializacion de variables y valores.
+	float d;
+	int x, y, midx, midy;
+	int r=50;
+
+	x=0;
+	y=r;
+	midx=600/2;
+	midy=400/2;
+
+	//Algoritmo y renderizacion
+	d = 3 - 2 * r;
+	do{
+		Canvas->Pixels  [midx+x][midy+y]  = clBlue;
+		Canvas->Pixels  [midx+y][midy+x]  = clGreen;
+		Canvas->Pixels  [midx+y][midy-x]  = clRed;
+		Canvas->Pixels  [midx+x][midy-y]  = clYellow;
+		Canvas->Pixels  [midx-x][midy-y]  = clBlue;
+		Canvas->Pixels  [midx-y][midy-x]  = clGreen;
+		Canvas->Pixels  [midx-y][midy+x]  = clRed;
+		Canvas->Pixels  [midx-x][midy+y]  = clYellow;
+	if (d <= 0) {
+		d = d + 4*x + 6;
+	}else{
+		d = d + 4*(x-y)  + 10;
+		y = y -1;
+	}
+	x = x + 1;
+	//Renderizacion
+	Sleep(30);
+	}
+	while (x < y);
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+	float x1,y1,x2,y2,startx,starty, epsilon;
+	int i,val;
+	int r=50;
+
+	//Inicializacion de punto
+	x1=r*cos(0);
+	y1=r*sin(0);
+	startx = x1;
+	starty = y1;
+
+	//Calculo de epsilon
+	i=0;
+	do{
+		val = pow(2,i);
+		i++;
+	}while(val<r);
+	epsilon = 1/pow(2,i-1);
+
+	do{
+	   x2=x1+y1*epsilon;
+	   y2=y1-epsilon*x2;
+	   Canvas->Pixels	[200+x2] [200+y2] = clBlue;
+
+	   x1=x2;
+	   y1=y2;
+	   Sleep(30);
+	}while((y1-starty)<epsilon || (startx - x1) > epsilon);
+}
+//---------------------------------------------------------------------------
