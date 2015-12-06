@@ -48,6 +48,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		x+=xi;
 		y+=yi;
 		Canvas->Pixels[x][y] = clWhite;   // renderiza la linea
+		Sleep(30); // permite ver el render de la linea
 	}
 }
 //---------------------------------------------------------------------------
@@ -67,6 +68,7 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 	for(x=x1;x<=x2;x++)
 	{
 		Canvas->Pixels[x][y] = clGreen; //renderiza la linea
+		Sleep(30); //permite ver el render de la linea
 		e+=iy;
 		if(e>0){
 			y++;

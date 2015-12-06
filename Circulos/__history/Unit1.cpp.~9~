@@ -48,6 +48,8 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		y = y -1;
 	}
 	x = x + 1;
+	//Renderizacion
+	Sleep(30);
 	}
 	while (x < y);
 }
@@ -80,6 +82,8 @@ void __fastcall TForm1::Button2Click(TObject *Sender)
 	//Reinicializa el punto de encuentro
 	   x1=x2;
 	   y1=y2;
+	//Renderizacion
+	   Sleep(30);
 	}while((y1-starty)<epsilon || (startx - x1) > epsilon);
 }
 //---------------------------------------------------------------------------
